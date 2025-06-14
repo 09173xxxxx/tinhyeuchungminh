@@ -5,127 +5,164 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>3rd Anniversary</title>
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
   <style>
     body {
       margin: 0;
       font-family: 'Dancing Script', cursive;
       background: pink;
-      overflow-x: hidden;
+      overflow: hidden;
     }
-    .section {
-      min-height: 100vh;
+    .slide {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 50px;
+      opacity: 0;
+      transition: opacity 1s ease, transform 1s ease;
+      transform: scale(0.95);
+      pointer-events: none;
     }
-    .hero {
-      background: url('your-image.jpg') center/cover no-repeat;
-      color: white;
+    .slide.active {
+      opacity: 1;
+      transform: scale(1);
+      pointer-events: auto;
     }
-    .hero h1 {
-      font-size: 3em;
-      background-color: rgba(0,0,0,0.4);
-      padding: 20px;
-      border-radius: 15px;
-    }
-    .timeline img {
+    .content {
       max-width: 80%;
-      border-radius: 15px;
-      margin: 20px auto;
+      color: white;
+      font-size: 2em;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 20px;
+    }
+    .btn-next {
+      margin-top: 20px;
+      font-size: 1em;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      background: white;
+      color: black;
+      cursor: pointer;
     }
     .gallery img {
       width: 200px;
       margin: 10px;
       border-radius: 10px;
-      cursor: pointer;
-      transition: transform 0.3s;
     }
-    .gallery img:hover {
-      transform: scale(1.1);
-    }
-    .love-letter {
-      font-size: 1.5em;
-      max-width: 800px;
-      margin: auto;
-      animation: typing 4s steps(60, end), blink .75s step-end infinite;
-    }
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
-    }
-    @keyframes blink {
-      50% { border-color: transparent }
-    }
-    .music-toggle {
+    #fireworks {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 10px;
-      cursor: pointer;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: transparent;
+      pointer-events: none;
+      z-index: 1000;
     }
   </style>
 </head>
 <body>
-  <audio id="bg-music" loop>
-    <source src="your-music.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
-  <button class="music-toggle" onclick="toggleMusic()">Bật/Tắt Nhạc</button>
+  <canvas id="fireworks"></canvas>
 
-  <section class="section hero" data-aos="fade-in">
-    <h1>Chào mừng em đến với hành trình 3 năm của tụi mình 💕</h1>
-  </section>
-
-  <section class="section timeline" data-aos="fade-up">
-    <div>
+  <div class="slide active" id="slide1">
+    <div class="content">
+      <h1>Chào mừng em đến với hành trình 3 năm của tụi mình 💕</h1>
+      <button class="btn-next" onclick="nextSlide()">Tiếp tục</button>
+    </div>
+  </div>
+  <div class="slide" id="slide2">
+    <div class="content">
       <h2>Năm đầu tiên</h2>
       <img src="image1.jpg" alt="Year 1">
+      <button class="btn-next" onclick="nextSlide()">Tiếp tục</button>
     </div>
-    <div>
+  </div>
+  <div class="slide" id="slide3">
+    <div class="content">
       <h2>Năm thứ hai</h2>
       <img src="image2.jpg" alt="Year 2">
+      <button class="btn-next" onclick="nextSlide()">Tiếp tục</button>
     </div>
-    <div>
+  </div>
+  <div class="slide" id="slide4">
+    <div class="content">
       <h2>Năm thứ ba</h2>
       <img src="image3.jpg" alt="Year 3">
+      <button class="btn-next" onclick="nextSlide()">Tiếp tục</button>
     </div>
-  </section>
+  </div>
+  <div class="slide" id="slide5">
+    <div class="content gallery">
+      <h2>Khoảnh khắc của chúng ta</h2>
+      <img src="photo1.jpg">
+      <img src="photo2.jpg">
+      <img src="photo3.jpg">
+      <button class="btn-next" onclick="nextSlide()">Tiếp tục</button>
+    </div>
+  </div>
+  <div class="slide" id="slide6">
+    <div class="content">
+      <p><!-- Viết lời tỏ tình ở đây --></p>
+      <h2>Cảm ơn em đã đồng hành cùng anh đến tận bây giờ...</h2>
+      <p>Mình cùng nhau đi tiếp nhé 💖</p>
+    </div>
+  </div>
 
-  <section class="section gallery" data-aos="zoom-in">
-    <h2>Khoảnh khắc của chúng ta</h2>
-    <img src="photo1.jpg" alt="Photo">
-    <img src="photo2.jpg" alt="Photo">
-    <img src="photo3.jpg" alt="Photo">
-  </section>
-
-  <section class="section love-letter" data-aos="fade-left">
-    <p><!-- Bạn sẽ viết lời tỏ tình ở đây --></p>
-  </section>
-
-  <section class="section" data-aos="fade-up">
-    <h2>Cảm ơn em đã đồng hành cùng anh đến tận bây giờ...</h2>
-    <p>Mình cùng nhau đi tiếp nhé 💖</p>
-  </section>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
   <script>
-    AOS.init();
-    let music = document.getElementById('bg-music');
-    let playing = false;
-    function toggleMusic() {
-      if (playing) {
-        music.pause();
-      } else {
-        music.play();
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+
+    function nextSlide() {
+      if (currentSlide < slides.length - 1) {
+        slides[currentSlide].classList.remove('active');
+        currentSlide++;
+        slides[currentSlide].classList.add('active');
       }
-      playing = !playing;
     }
+
+    // Fireworks effect
+    const canvas = document.getElementById('fireworks');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    function heart(x, y, size, alpha) {
+      ctx.fillStyle = `rgba(255, 0, 128, ${alpha})`;
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+      ctx.bezierCurveTo(x, y - size, x - size, y - size, x - size, y);
+      ctx.bezierCurveTo(x - size, y + size, x, y + size * 1.5, x, y + size * 2);
+      ctx.bezierCurveTo(x, y + size * 1.5, x + size, y + size, x + size, y);
+      ctx.bezierCurveTo(x + size, y - size, x, y - size, x, y);
+      ctx.fill();
+    }
+
+    let hearts = [];
+    for (let i = 0; i < 50; i++) {
+      hearts.push({
+        x: Math.random() * canvas.width,
+        y: canvas.height + Math.random() * canvas.height,
+        size: 10 + Math.random() * 10,
+        speed: 1 + Math.random() * 2,
+        alpha: 0.7 + Math.random() * 0.3
+      });
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let h of hearts) {
+        heart(h.x, h.y, h.size, h.alpha);
+        h.y -= h.speed;
+        if (h.y < -20) h.y = canvas.height + Math.random() * canvas.height;
+      }
+      requestAnimationFrame(draw);
+    }
+    draw();
   </script>
 </body>
 </html>
