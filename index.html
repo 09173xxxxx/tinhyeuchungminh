@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3rd Anniversary</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Dancing Script', cursive;
+      background: pink;
+      overflow-x: hidden;
+    }
+    .section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 50px;
+    }
+    .hero {
+      background: url('your-image.jpg') center/cover no-repeat;
+      color: white;
+    }
+    .hero h1 {
+      font-size: 3em;
+      background-color: rgba(0,0,0,0.4);
+      padding: 20px;
+      border-radius: 15px;
+    }
+    .timeline img {
+      max-width: 80%;
+      border-radius: 15px;
+      margin: 20px auto;
+    }
+    .gallery img {
+      width: 200px;
+      margin: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .gallery img:hover {
+      transform: scale(1.1);
+    }
+    .love-letter {
+      font-size: 1.5em;
+      max-width: 800px;
+      margin: auto;
+      animation: typing 4s steps(60, end), blink .75s step-end infinite;
+    }
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    @keyframes blink {
+      50% { border-color: transparent }
+    }
+    .music-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <audio id="bg-music" loop>
+    <source src="your-music.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+  <button class="music-toggle" onclick="toggleMusic()">Bật/Tắt Nhạc</button>
+
+  <section class="section hero" data-aos="fade-in">
+    <h1>Chào mừng em đến với hành trình 3 năm của tụi mình 💕</h1>
+  </section>
+
+  <section class="section timeline" data-aos="fade-up">
+    <div>
+      <h2>Năm đầu tiên</h2>
+      <img src="image1.jpg" alt="Year 1">
+    </div>
+    <div>
+      <h2>Năm thứ hai</h2>
+      <img src="image2.jpg" alt="Year 2">
+    </div>
+    <div>
+      <h2>Năm thứ ba</h2>
+      <img src="image3.jpg" alt="Year 3">
+    </div>
+  </section>
+
+  <section class="section gallery" data-aos="zoom-in">
+    <h2>Khoảnh khắc của chúng ta</h2>
+    <img src="photo1.jpg" alt="Photo">
+    <img src="photo2.jpg" alt="Photo">
+    <img src="photo3.jpg" alt="Photo">
+  </section>
+
+  <section class="section love-letter" data-aos="fade-left">
+    <p><!-- Bạn sẽ viết lời tỏ tình ở đây --></p>
+  </section>
+
+  <section class="section" data-aos="fade-up">
+    <h2>Cảm ơn em đã đồng hành cùng anh đến tận bây giờ...</h2>
+    <p>Mình cùng nhau đi tiếp nhé 💖</p>
+  </section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>
+    AOS.init();
+    let music = document.getElementById('bg-music');
+    let playing = false;
+    function toggleMusic() {
+      if (playing) {
+        music.pause();
+      } else {
+        music.play();
+      }
+      playing = !playing;
+    }
+  </script>
+</body>
+</html>
