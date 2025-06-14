@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>3rd Anniversary</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Dancing Script', cursive;
+      background: pink;
+      overflow: hidden;
+    }
+    .section, .gallery, .year-section, .modal {
+      display: none;
+    }
+    .active {
+      display: block;
+    }
+    .center {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    .nav-btn {
+      margin: 10px;
+      padding: 10px 20px;
+      border: none;
+      background: white;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .images-container img {
+      width: 200px;
+      margin: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .typewriter {
+      width: 80%;
+      margin: auto;
+      border-right: .15em solid black;
+      white-space: nowrap;
+      overflow: hidden;
+      font-size: 1.5em;
+      animation: typing 4s steps(40, end), blink .75s step-end infinite;
+    }
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    @keyframes blink {
+      50% { border-color: transparent }
+    }
+    #fireworks {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 999;
+    }
+    .music-toggle {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+      background: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .modal {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 10000;
+    }
+    .modal img {
+      max-width: 90%;
+      max-height: 70vh;
+      border-radius: 10px;
+    }
+    .modal p {
+      color: white;
+      margin-top: 15px;
+      font-size: 1.2em;
+    }
+    .modal button {
+      margin-top: 10px;
+      padding: 5px 15px;
+      font-size: 1em;
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="fireworks"></canvas>
+<audio id="bg-music" autoplay loop>
+  <source src="love.mp3" type="audio/mpeg">
+</audio>
+<button class="music-toggle" onclick="toggleMusic()">🔊 Bật/Tắt nhạc</button>
+
+<div class="center active" id="home">
+  <h1>Chào mừng em đến với hành trình yêu thương của tụi mình 💕</h1>
+  <div>
+    <button class="nav-btn" onclick="showSection('y2022')">2022</button>
+    <button class="nav-btn" onclick="showSection('y2023')">2023</button>
+    <button class="nav-btn" onclick="showSection('y2024')">2024</button>
+    <button class="nav-btn" onclick="showSection('y2025')">2025</button>
+    <button class="nav-btn" onclick="showSection('gallery')">Ảnh kỷ niệm</button>
+  </div>
+</div>
+
+<div class="year-section" id="y2022">
+  <div class="images-container">
+    <img src="photo-2022-1.jpg" onclick="openModal('photo-2022-1.jpg','Chú thích ảnh 1 - 2022')"/>
+    <img src="photo-2022-2.jpg" onclick="openModal('photo-2022-2.jpg','Chú thích ảnh 2 - 2022')"/>
+    <img src="photo-2022-3.jpg" onclick="openModal('photo-2022-3.jpg','Chú thích ảnh 3 - 2022')"/>
+    <img src="photo-2022-4.jpg" onclick="openModal('photo-2022-4.jpg','Chú thích ảnh 4 - 2022')"/>
+    <img src="photo-2022-5.jpg" onclick="openModal('photo-2022-5.jpg','Chú thích ảnh 5 - 2022')"/>
+  </div>
+  <div class="typewriter">Chuyện tình yêu của tụi mình bắt đầu thật đáng nhớ vào năm 2022...</div>
+</div>
+
+<div class="year-section" id="y2023">
+  <div class="images-container">
+    <!-- Tương tự: 6 ảnh + openModal -->
+  </div>
+  <div class="typewriter">2023 là một năm rực rỡ với biết bao kỷ niệm khó quên...</div>
+</div>
+
+<div class="year-section" id="y2024">
+  <div class="images-container">
+    <!-- 7 ảnh -->
+  </div>
+  <div class="typewriter">2024 - Tụi mình trưởng thành hơn, hiểu nhau hơn...</div>
+</div>
+
+<div class="year-section" id="y2025">
+  <div class="images-container">
+    <!-- 8 ảnh -->
+  </div>
+  <div class="typewriter">2025 - Một chặng đường yêu đong đầy...</div>
+</div>
+
+<div class="gallery" id="gallery">
+  <h2 style="text-align:center;">Ảnh kỷ niệm các lần kỷ niệm 💝</h2>
+  <div class="images-container">
+    <img src="anniversary-1.jpg" onclick="openModal('anniversary-1.jpg','Kỷ niệm lần 1')"/>
+    <img src="anniversary-2.jpg" onclick="openModal('anniversary-2.jpg','Kỷ niệm lần 2')"/>
+    <!-- Thêm tùy ý -->
+  </div>
+</div>
+
+<div class="modal" id="modal">
+  <img id="modal-img" src="">
+  <p id="modal-caption"></p>
+  <button onclick="closeModal()">Đóng</button>
+</div>
+
+<script>
+  const music = document.getElementById('bg-music');
+  let isPlaying = true;
+
+  function toggleMusic() {
+    if (isPlaying) music.pause();
+    else music.play();
+    isPlaying = !isPlaying;
+  }
+
+  function showSection(id) {
+    document.querySelectorAll('.center, .year-section, .gallery').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
+
+  function openModal(src, caption) {
+    document.getElementById('modal-img').src = src;
+    document.getElementById('modal-caption').textContent = caption;
+    document.getElementById('modal').classList.add('active');
+  }
+
+  function closeModal() {
+    document.getElementById('modal').classList.remove('active');
+  }
+
+  // Fireworks (trái tim)
+  const canvas = document.getElementById('fireworks');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  function heart(x, y, size, alpha) {
+    ctx.fillStyle = `rgba(255, 0, 128, ${alpha})`;
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.bezierCurveTo(x, y - size, x - size, y - size, x - size, y);
+    ctx.bezierCurveTo(x - size, y + size, x, y + size * 1.5, x, y + size * 2);
+    ctx.bezierCurveTo(x, y + size * 1.5, x + size, y + size, x + size, y);
+    ctx.bezierCurveTo(x + size, y - size, x, y - size, x, y);
+    ctx.fill();
+  }
+  let hearts = [];
+  for (let i = 0; i < 50; i++) {
+    hearts.push({
+      x: Math.random() * canvas.width,
+      y: canvas.height + Math.random() * canvas.height,
+      size: 10 + Math.random() * 10,
+      speed: 1 + Math.random() * 2,
+      alpha: 0.7 + Math.random() * 0.3
+    });
+  }
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let h of hearts) {
+      heart(h.x, h.y, h.size, h.alpha);
+      h.y -= h.speed;
+      if (h.y < -20) h.y = canvas.height + Math.random() * canvas.height;
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+</script>
+
+</body>
+</html>
