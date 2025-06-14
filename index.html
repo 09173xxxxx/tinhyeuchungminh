@@ -64,105 +64,146 @@
       pointer-events: none;
       z-index: 1000;
     }
+    .music-toggle {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 9999;
+      background-color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
-  <canvas id="fireworks"></canvas>
 
-  <div class="slide active" id="slide1">
-    <div class="content">
-      <h1>Chào mừng em đến với hành trình 3 năm của tụi mình 💕</h1>
-      <button class="btn-next" onclick="nextSlide()">Tiếp tục</button>
-    </div>
-  </div>
-  <div class="slide" id="slide2">
-    <div class="content">
-      <h2>Năm đầu tiên</h2>
-      <img src="image1.jpg" alt="Year 1">
-      <button class="btn-next" onclick="nextSlide()">Tiếp tục</button>
-    </div>
-  </div>
-  <div class="slide" id="slide3">
-    <div class="content">
-      <h2>Năm thứ hai</h2>
-      <img src="image2.jpg" alt="Year 2">
-      <button class="btn-next" onclick="nextSlide()">Tiếp tục</button>
-    </div>
-  </div>
-  <div class="slide" id="slide4">
-    <div class="content">
-      <h2>Năm thứ ba</h2>
-      <img src="image3.jpg" alt="Year 3">
-      <button class="btn-next" onclick="nextSlide()">Tiếp tục</button>
-    </div>
-  </div>
-  <div class="slide" id="slide5">
-    <div class="content gallery">
-      <h2>Khoảnh khắc của chúng ta</h2>
-      <img src="photo1.jpg">
-      <img src="photo2.jpg">
-      <img src="photo3.jpg">
-      <button class="btn-next" onclick="nextSlide()">Tiếp tục</button>
-    </div>
-  </div>
-  <div class="slide" id="slide6">
-    <div class="content">
-      <p><!-- Viết lời tỏ tình ở đây --></p>
-      <h2>Cảm ơn em đã đồng hành cùng anh đến tận bây giờ...</h2>
-      <p>Mình cùng nhau đi tiếp nhé 💖</p>
-    </div>
-  </div>
+<canvas id="fireworks"></canvas>
 
-  <script>
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.slide');
+<audio id="bg-music" autoplay loop>
+  <source src="love.mp3" type="audio/mpeg">
+  Trình duyệt của bạn không hỗ trợ audio.
+</audio>
 
-    function nextSlide() {
-      if (currentSlide < slides.length - 1) {
-        slides[currentSlide].classList.remove('active');
-        currentSlide++;
-        slides[currentSlide].classList.add('active');
-      }
+<button class="music-toggle" onclick="toggleMusic()">🔊 Bật/Tắt nhạc</button>
+
+<div class="slide active" id="slide1">
+  <div class="content">
+    <h1>Chào mừng em đến với hành trình 3 năm của tụi mình 💕</h1>
+    <button class="btn-next" onclick="nextSlide()">Tiếp tục</button>
+  </div>
+</div>
+<div class="slide" id="slide2">
+  <div class="content">
+    <h2>Năm đầu tiên</h2>
+    <img src="image1.jpg" alt="Year 1">
+    <button class="btn-next" onclick="nextSlide()">Tiếp tục</button>
+  </div>
+</div>
+<div class="slide" id="slide3">
+  <div class="content">
+    <h2>Năm thứ hai</h2>
+    <img src="image2.jpg" alt="Year 2">
+    <button class="btn-next" onclick="nextSlide()">Tiếp tục</button>
+  </div>
+</div>
+<div class="slide" id="slide4">
+  <div class="content">
+    <h2>Năm thứ ba</h2>
+    <img src="image3.jpg" alt="Year 3">
+    <button class="btn-next" onclick="nextSlide()">Tiếp tục</button>
+  </div>
+</div>
+<div class="slide" id="slide5">
+  <div class="content gallery">
+    <h2>Khoảnh khắc của chúng ta</h2>
+    <img src="photo1.jpg">
+    <img src="photo2.jpg">
+    <img src="photo3.jpg">
+    <button class="btn-next" onclick="nextSlide()">Tiếp tục</button>
+  </div>
+</div>
+<div class="slide" id="slide6">
+  <div class="content">
+    <p><!-- Viết lời tỏ tình ở đây --></p>
+    <h2>Cảm ơn em đã đồng hành cùng anh đến tận bây giờ...</h2>
+    <p>Mình cùng nhau đi tiếp nhé 💖</p>
+  </div>
+</div>
+
+<script>
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.slide');
+
+  function nextSlide() {
+    if (currentSlide < slides.length - 1) {
+      slides[currentSlide].classList.remove('active');
+      currentSlide++;
+      slides[currentSlide].classList.add('active');
     }
+  }
 
-    // Fireworks effect
-    const canvas = document.getElementById('fireworks');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+  // Fireworks
+  const canvas = document.getElementById('fireworks');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
 
-    function heart(x, y, size, alpha) {
-      ctx.fillStyle = `rgba(255, 0, 128, ${alpha})`;
-      ctx.beginPath();
-      ctx.moveTo(x, y);
-      ctx.bezierCurveTo(x, y - size, x - size, y - size, x - size, y);
-      ctx.bezierCurveTo(x - size, y + size, x, y + size * 1.5, x, y + size * 2);
-      ctx.bezierCurveTo(x, y + size * 1.5, x + size, y + size, x + size, y);
-      ctx.bezierCurveTo(x + size, y - size, x, y - size, x, y);
-      ctx.fill();
+  function heart(x, y, size, alpha) {
+    ctx.fillStyle = `rgba(255, 0, 128, ${alpha})`;
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.bezierCurveTo(x, y - size, x - size, y - size, x - size, y);
+    ctx.bezierCurveTo(x - size, y + size, x, y + size * 1.5, x, y + size * 2);
+    ctx.bezierCurveTo(x, y + size * 1.5, x + size, y + size, x + size, y);
+    ctx.bezierCurveTo(x + size, y - size, x, y - size, x, y);
+    ctx.fill();
+  }
+
+  let hearts = [];
+  for (let i = 0; i < 50; i++) {
+    hearts.push({
+      x: Math.random() * canvas.width,
+      y: canvas.height + Math.random() * canvas.height,
+      size: 10 + Math.random() * 10,
+      speed: 1 + Math.random() * 2,
+      alpha: 0.7 + Math.random() * 0.3
+    });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let h of hearts) {
+      heart(h.x, h.y, h.size, h.alpha);
+      h.y -= h.speed;
+      if (h.y < -20) h.y = canvas.height + Math.random() * canvas.height;
     }
+    requestAnimationFrame(draw);
+  }
+  draw();
 
-    let hearts = [];
-    for (let i = 0; i < 50; i++) {
-      hearts.push({
-        x: Math.random() * canvas.width,
-        y: canvas.height + Math.random() * canvas.height,
-        size: 10 + Math.random() * 10,
-        speed: 1 + Math.random() * 2,
-        alpha: 0.7 + Math.random() * 0.3
+  // Toggle music
+  const music = document.getElementById('bg-music');
+  let isPlaying = true;
+  function toggleMusic() {
+    if (isPlaying) {
+      music.pause();
+    } else {
+      music.play();
+    }
+    isPlaying = !isPlaying;
+  }
+
+  window.addEventListener('load', () => {
+    const playPromise = music.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(error => {
+        console.log('Tự động phát bị chặn bởi trình duyệt');
       });
     }
-
-    function draw() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      for (let h of hearts) {
-        heart(h.x, h.y, h.size, h.alpha);
-        h.y -= h.speed;
-        if (h.y < -20) h.y = canvas.height + Math.random() * canvas.height;
-      }
-      requestAnimationFrame(draw);
-    }
-    draw();
-  </script>
+  });
+</script>
 </body>
 </html>
