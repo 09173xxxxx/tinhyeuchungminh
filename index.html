@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kỷ niệm tình yêu 3 năm</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Dancing Script', cursive;
+      background: pink;
+      overflow-x: hidden;
+    }
+    .music-toggle {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+      background: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .center {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    .nav-btn {
+      margin: 10px;
+      padding: 10px 20px;
+      border: none;
+      background: white;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .section {
+      display: none;
+    }
+    .active {
+      display: block;
+    }
+    .images-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .images-container img {
+      width: 200px;
+      height: 280px;
+      margin: 10px;
+      border-radius: 10px;
+      object-fit: cover;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .images-container img:hover {
+      transform: scale(1.05);
+    }
+    .typewriter {
+      width: 80%%;
+      margin: 20px auto;
+      font-size: 1.5em;
+      overflow: hidden;
+      white-space: normal;
+      border-right: .15em solid black;
+      animation: typing 4s steps(40, end), blink .75s step-end infinite;
+    }
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100%% }
+    }
+    @keyframes blink {
+      50%% { border-color: transparent }
+    }
+    #modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0; top: 0;
+      width: 100%%; height: 100%%;
+      background: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    #modal img {
+      max-width: 90%%;
+      max-height: 80vh;
+      border-radius: 10px;
+    }
+    #caption {
+      margin-top: 20px;
+      color: white;
+      font-size: 1.2em;
+    }
+  </style>
+</head>
+<body>
+
+<button class="music-toggle" onclick="toggleMusic()">🔊 Bật/Tắt nhạc</button>
+<audio id="bg-music" autoplay loop>
+  <source src="love.mp3" type="audio/mpeg">
+</audio>
+
+<div class="center active" id="home">
+  <h1>Chào mừng em đến với hành trình yêu thương của tụi mình 💕</h1>
+  <div>
+    <button class="nav-btn" onclick="showSection('y2022')">2022</button>
+    <button class="nav-btn" onclick="showSection('y2023')">2023</button>
+    <button class="nav-btn" onclick="showSection('y2024')">2024</button>
+    <button class="nav-btn" onclick="showSection('y2025')">2025</button>
+    <button class="nav-btn" onclick="showSection('gallery')">Ảnh kỷ niệm</button>
+  </div>
+</div>
+
+<div id="y2022" class="section">
+  <div class="images-container">{img2022}</div>
+  <div class="typewriter">Chuyện tình yêu của tụi mình bắt đầu thật đáng nhớ vào năm 2022...</div>
+</div>
+<div id="y2023" class="section">
+  <div class="images-container">{img2023}</div>
+  <div class="typewriter">2023 là một năm rực rỡ với biết bao kỷ niệm khó quên...</div>
+</div>
+<div id="y2024" class="section">
+  <div class="images-container">{img2024}</div>
+  <div class="typewriter">2024 - Tụi mình trưởng thành hơn, hiểu nhau hơn...</div>
+</div>
+<div id="y2025" class="section">
+  <div class="images-container">{img2025}</div>
+  <div class="typewriter">2025 - Một chặng đường yêu đong đầy...</div>
+</div>
+
+<div id="gallery" class="section">
+  <div class="images-container">
+    <img src="anniversary-1.jpg" alt="Ảnh kỷ niệm 1" onclick="openModal(this)">
+    <img src="anniversary-2.jpg" alt="Ảnh kỷ niệm 2" onclick="openModal(this)">
+  </div>
+  <div class="typewriter">Những khoảnh khắc đặc biệt không thể nào quên...</div>
+</div>
+
+<div id="modal" onclick="closeModal()">
+  <img id="modal-img" src="">
+  <div id="caption"></div>
+</div>
+
+<script>
+  const music = document.getElementById('bg-music');
+  let isPlaying = true;
+  function toggleMusic() {
+    if (isPlaying) music.pause();
+    else music.play();
+    isPlaying = !isPlaying;
+  }
+  function showSection(id) {
+    document.querySelectorAll('.center, .section').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
+  function openModal(img) {
+    document.getElementById('modal-img').src = img.src;
+    document.getElementById('caption').innerText = img.alt;
+    document.getElementById('modal').style.display = 'flex';
+  }
+  function closeModal() {
+    document.getElementById('modal').style.display = 'none';
+  }
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>AOS.init();</script>
+
+</body>
+</html>
